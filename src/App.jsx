@@ -21,7 +21,9 @@ export default function App() {
           kotoba: item.kotoba || item.Kotoba || "",
           romaji: item.romaji || item.Romaji || "",
           arti: item.arti || item.Arti || "",
-          keterangan: item.keterangan || item.Keterangan || "", // Tambahkan keterangan di sini
+          keterangan: item.keterangan || item.Keterangan || "",
+          kamus: item.kamus || item.Kamus || "",   // Tambahkan baris ini
+          perubahan: item.perubahan || item.perubahan || "", // Tambahkan baris ini
         }));
 
         setData(json);
@@ -83,7 +85,7 @@ export default function App() {
     <div className="h-screen flex flex-col items-center justify-center bg-gray-100 px-4">
       {/* Card */}
       <div
-        className="w-80 h-52 perspective cursor-pointer"
+        className="w-[320px] h-[240px] perspective cursor-pointer"
         onClick={() => setFlipped((prev) => !prev)}
       >
         <div
@@ -93,7 +95,14 @@ export default function App() {
         >
           {/* Front Card */}
           <div className="absolute w-full h-full backface-hidden bg-white rounded-2xl shadow-lg flex flex-col items-center justify-center">
-            <h1 className="text-2xl font-semibold text-center">
+            <div className="absolute top-4 left-4 text-xs text-gray-300">
+              {current.kamus}
+            </div>
+            <div className="absolute top-4 right-4 text-xs text-gray-300">
+              {current.perubahan}
+            </div>
+            
+            <h1 className="text-2xl font-normal text-center">
               {current.kotoba || "-"}
             </h1>
             <p className="text-gray-500 mt-2">
@@ -103,12 +112,10 @@ export default function App() {
 
           {/* Back Card */}
           <div className="absolute w-full h-full backface-hidden rotate-y-180 bg-blue-500 text-white rounded-2xl shadow-lg relative">
-            {/* Bagian keterangan yang diposisikan di atas kanan */}
             <div className="absolute top-4 right-4 text-xs font-normal">
               {current.keterangan || "-"}
             </div>
             
-            {/* Bagian arti di tengah */}
             <div className="flex items-center justify-center h-full">
               <h1 className="text-xl font-semibold text-center">
                 {current.arti || "-"}
